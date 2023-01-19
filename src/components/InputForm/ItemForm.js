@@ -1,4 +1,6 @@
+import PropTypes from 'prop-types'
 import {Heading, Container, Title, Button} from './ItemForm.styled'
+
 export const ItemForm = ({ onSubmit }) => {
   const hendleSubmit = event => {
     event.preventDefault();
@@ -29,3 +31,7 @@ export const ItemForm = ({ onSubmit }) => {
     </>
   );
 };
+
+ItemForm.propTypes ={
+  onSubmit: PropTypes.func.isRequired
+}

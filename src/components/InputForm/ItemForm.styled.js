@@ -1,18 +1,16 @@
 import styled from '@emotion/styled'
 
 export const Heading = styled.h3`
-margin-left: -310px;
+margin-left: -255px;
 `
-
 export const Container = styled.div`
   border: 2px solid;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  height: 250px;
+  height: 290px;
   width: 500px;
   padding: 30px;
-
 `
 export const Title = styled.h5`
   margin-top: 20px;
@@ -22,4 +20,11 @@ export const Title = styled.h5`
 export const Button = styled.button`
   display: block;
   margin-top: 30px;
+  border: none;
+  border-radius: 5px;
+  padding: 6px;
+  background-color: #d4d5d8;
+  &:hover {
+    background-color: #538ce9;
+  }
 `
