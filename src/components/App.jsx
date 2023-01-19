@@ -1,58 +1,60 @@
 import { nanoid } from 'nanoid';
+import Notiflix from 'notiflix';
 import { Component } from 'react';
-import { createGlobalStyle } from 'styled-components';
-import { ItemForm } from './InputForm/ItemForm.js';
-import { ItemList } from './InputList/ItemList.js';
+import { ContactForm } from './ContactForm/ContactForm.js';
+import { ContactList } from './ContactList/ContactList.js';
 import Filter from './Filter/Filter.js';
-//-------------------------------------------------------
-const Global = createGlobalStyle`
-*{margin: 0px;
-  padding: 0px;
-  box-sizing: border-box; 
-}`;
+import { Section, Title } from './App.styled';
 
 //------------------------------------------------------
-
-  const cont = [
-    {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
-    {id: 'id-2', name: 'Hermione Kline', number: '443-89-12'},
-    {id: 'id-3', name: 'Eden Clements', number: '645-17-79'},
-    {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
-  ]
-
-
-
+const cont = [
+  { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+  { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+  { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+  { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+];
 export class App extends Component {
   state = {
     contacts: cont,
-    filter: ''
+    filter: '',
   };
-
+  //=========================================================================
   addForm = (name, number) => {
+    if (
+      this.state.contacts.find(
+        contact => contact.name.toLowerCase() === name.toLowerCase()
+      )
+    ) {
+      alert(`${name} is already in contacts`);
+      return;
+    }
     this.setState(prevState => ({
       contacts: [...prevState.contacts, { id: nanoid(3), name, number }],
     }));
   };
-
+  //=========================================================================
   deleteItem = itemName => {
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(item => item.name !== itemName),
     }));
   };
   //=========================================================================
-  addData = (data) => {
-     console.log(data)
-     this.setState((prev) => ({
-       filter: prev.contacts.filter(val => val.name === data)
-     }));
-     
-   }
+
+  searchContact = e => this.setState({ filter: e.target.value });
+
+  filterContacts = items =>
+    items.filter(item =>
+      item.name.toLowerCase().includes(this.state.filter.toLowerCase())
+    );
+
   //=========================================================================
   render() {
+    const { contacts, filter } = this.state;
+
     return (
       <div
         style={{
-          height: '100vh',
+          height: 'auto',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
@@ -61,10 +63,22 @@ export class App extends Component {
           color: '#010101',
         }}
       >
-        <Global />
-        <ItemForm onSubmit={this.addForm} />
-        <Filter onInput={this.addData} rendering={this.state.filter}/>
-        <ItemList items={this.state.contacts} onDelete={this.deleteItem} />
+        <Title>Phonebook</Title>
+        <ContactForm onSubmit={this.addForm} contacts={contacts} />
+        <Section>
+          <Title>Contacts</Title>
+          {contacts.length > 0 ? (
+            <>
+              <Filter onChange={this.searchContact} value={filter} />
+              <ContactList
+                items={this.filterContacts(contacts)}
+                onDelete={this.deleteItem}
+              />
+            </>
+          ) : (
+            Notiflix.Report.info('Ooops, there is no contact in your phonebook')
+          )}
+        </Section>
       </div>
     );
   }

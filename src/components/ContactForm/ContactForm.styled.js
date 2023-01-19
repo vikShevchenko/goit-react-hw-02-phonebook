@@ -1,14 +1,11 @@
 import styled from '@emotion/styled'
 
-export const Heading = styled.h3`
-margin-left: -255px;
-`
 export const Container = styled.div`
   border: 2px solid;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  height: 290px;
+  height: 240px;
   width: 500px;
   padding: 30px;
 `
@@ -27,4 +24,7 @@ export const Button = styled.button`
   &:hover {
     background-color: #538ce9;
   }
+`
+export const Input = styled.input`
+font-size: 20px
 `

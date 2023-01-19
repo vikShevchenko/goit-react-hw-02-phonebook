@@ -4,7 +4,7 @@ export const List = styled.ul`
 padding-left: 0px;
 `
 export const Element = styled.li`
-margin-left: -100px;
+margin-left: 0px;
 font-size: 20px;
 display: flex;
 gap: 20px;

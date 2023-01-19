@@ -1,29 +1,25 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import {Wripper, FiltetTitle, Input} from './Filter.styled'
 
-export default function Filter({onInput, rendering}) {
+
+export default function Filter({onChange, value}) {
     
-    const myForm = (event) => { 
-        onInput(event.currentTarget.value)
-        
-      };
-
   return (
-    <div>
-      <p>Find contacts by name</p>
-        <input
-        onInput={myForm}
+    <Wripper>
+      <FiltetTitle>Find contacts by name</FiltetTitle>
+        <Input
+        onChange={onChange}
+        value={value}
         name='form'
         type='text' 
         >
-        </input>
-        {/* {rendering ? <p>{rendering[0].name} {rendering[0].number}</p> : <p></p>} */}
-
-    </div>
+        </Input>
+    </Wripper>
   )
 }
-
 Filter.propTypes ={
-  onInput: PropTypes.func.isRequired,
-  rendering: PropTypes.string.isRequired
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired
 }
+
