@@ -1,7 +1,7 @@
 import { nanoid } from 'nanoid';
 import Notiflix from 'notiflix';
 import { Component } from 'react';
-import { ContactForm } from './ContactForm/ContactForm.js';
+import  ContactForm  from './ContactForm/ContactForm.js';
 import { ContactList } from './ContactList/ContactList.js';
 import Filter from './Filter/Filter.js';
 import { Section, Title } from './App.styled';
@@ -17,21 +17,25 @@ export class App extends Component {
     contacts: cont,
     filter: '',
   };
- 
-  addForm = (name, number) => {
+
+
+  addForm = (data) => {
+    const name = data.name;
+    const number = data.number
+
     if (
       this.state.contacts.find(
         contact => contact.name.toLowerCase() === name.toLowerCase()
       )
     ) {
-      alert(`${name} is already in contacts`);
+      alert(`${data.name} is already in contacts`);
       return;
     }
     this.setState(prevState => ({
       contacts: [...prevState.contacts, { id: nanoid(3), name, number }],
     }));
   };
-  
+
   deleteItem = itemId => {
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(item => item.id !== itemId),
@@ -61,7 +65,7 @@ export class App extends Component {
         }}
       >
         <Title>Phonebook</Title>
-        <ContactForm onSubmit={this.addForm} />
+        <ContactForm onSubm={this.addForm} />
         <Section>
           <Title>Contacts</Title>
           {contacts.length > 0 ? (

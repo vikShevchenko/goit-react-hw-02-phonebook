@@ -1,18 +1,39 @@
 import PropTypes from 'prop-types';
 import { Container, Title, Button, Input } from './ContactForm.styled';
+import React, {Component} from 'react';
 
-export const ContactForm = ({ onSubmit }) => {
-  const hendleSubmit = event => {
-    event.preventDefault();
-    const { name, number } = event.target.elements;
-    onSubmit(name.value, number.value);
+export default class ContactForm extends Component{
+  
+  state = {
+    name: '',
+    number: ''
+    
   };
+
+  hendleChange =(e)=> {
+    const {name, value} = e.currentTarget
+    this.setState({[name]: value})
+  }
+
+  hendleSubmit =(e)=> {
+    e.preventDefault()
+    this.props.onSubm(this.state)
+    this.reset()
+  }
+
+  reset =()=> {
+    this.setState({name: '', number: ''})
+  }
+render() {
+
   return (
     <div>
       <Container>
-        <form onSubmit={hendleSubmit}>
+        <form onSubmit={this.hendleSubmit}> 
           <Title>Name</Title>
           <Input
+            onChange={this.hendleChange}
+            value={this.state.name}
             type="text"
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -20,6 +41,8 @@ export const ContactForm = ({ onSubmit }) => {
           />
           <Title>Number</Title>
           <Input
+            onChange={this.hendleChange}
+            value={this.state.number}
             type="tel"
             name="number"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -31,7 +54,8 @@ export const ContactForm = ({ onSubmit }) => {
     </div>
   );
 };
+}
 
 ContactForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
+  onSubm: PropTypes.func.isRequired,
 };
