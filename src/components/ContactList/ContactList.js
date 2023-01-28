@@ -18,6 +18,6 @@ export const ContactList = ({ items, onDelete }) => {
 };
 
 ContactList.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.object).isRequired,
+  items: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)).isRequired,
   onDelete: PropTypes.func.isRequired,
 };

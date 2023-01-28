@@ -6,7 +6,6 @@ import { ContactList } from './ContactList/ContactList.js';
 import Filter from './Filter/Filter.js';
 import { Section, Title } from './App.styled';
 
-//------------------------------------------------------
 const cont = [
   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
   { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
@@ -18,7 +17,7 @@ export class App extends Component {
     contacts: cont,
     filter: '',
   };
-  //=========================================================================
+ 
   addForm = (name, number) => {
     if (
       this.state.contacts.find(
@@ -32,13 +31,12 @@ export class App extends Component {
       contacts: [...prevState.contacts, { id: nanoid(3), name, number }],
     }));
   };
-  //=========================================================================
+  
   deleteItem = itemId => {
     this.setState(prevState => ({
       contacts: prevState.contacts.filter(item => item.id !== itemId),
     }));
   };
-  //=========================================================================
 
   searchContact = e => this.setState({ filter: e.target.value });
 
@@ -47,7 +45,6 @@ export class App extends Component {
       item.name.toLowerCase().includes(this.state.filter.toLowerCase())
     );
 
-  //=========================================================================
   render() {
     const { contacts, filter } = this.state;
 
