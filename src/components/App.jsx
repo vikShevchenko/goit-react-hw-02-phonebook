@@ -33,9 +33,9 @@ export class App extends Component {
     }));
   };
   //=========================================================================
-  deleteItem = itemName => {
+  deleteItem = itemId => {
     this.setState(prevState => ({
-      contacts: prevState.contacts.filter(item => item.name !== itemName),
+      contacts: prevState.contacts.filter(item => item.id !== itemId),
     }));
   };
   //=========================================================================
@@ -64,7 +64,7 @@ export class App extends Component {
         }}
       >
         <Title>Phonebook</Title>
-        <ContactForm onSubmit={this.addForm} contacts={contacts} />
+        <ContactForm onSubmit={this.addForm} />
         <Section>
           <Title>Contacts</Title>
           {contacts.length > 0 ? (

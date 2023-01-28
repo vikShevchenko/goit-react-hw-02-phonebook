@@ -4,7 +4,7 @@ import {Wripper, FiltetTitle, Input} from './Filter.styled'
 
 
 export default function Filter({onChange, value}) {
-    
+  
   return (
     <Wripper>
       <FiltetTitle>Find contacts by name</FiltetTitle>

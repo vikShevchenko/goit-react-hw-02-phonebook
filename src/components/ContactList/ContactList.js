@@ -2,13 +2,14 @@ import PropTypes from 'prop-types';
 import { List, Element, Button } from './ContactList.styled';
 
 export const ContactList = ({ items, onDelete }) => {
+
   return (
     <>
       <List>
         {items.map(item => (
           <Element key={item.id}>
             {item.name}: {item.number}
-            <Button onClick={() => onDelete(item.name)}>Delete</Button>
+            <Button onClick={() => onDelete(item.id)}>Delete</Button>
           </Element>
         ))}
       </List>
@@ -17,6 +18,6 @@ export const ContactList = ({ items, onDelete }) => {
 };
 
 ContactList.propTypes = {
-  items: PropTypes.array.isRequired,
+  items: PropTypes.arrayOf(PropTypes.object).isRequired,
   onDelete: PropTypes.func.isRequired,
 };
